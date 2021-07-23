@@ -3,6 +3,7 @@ package wechat
 import (
 	"encoding/xml"
 	"fmt"
+
 	"github.com/linshenqi/payground/src/base"
 	"github.com/linshenqi/sptty"
 	"gopkg.in/resty.v1"
@@ -30,7 +31,7 @@ func (s *PaymentProvider) CreatePayment(payment *base.Payment) (*base.CreatePaym
 	reqOrder.FromPayment(payment)
 	reqOrder.GenerateSign(s.Endpoint.MchSecret)
 
-	url := fmt.Sprintf("https://api.mch.weixin.qq.com/pay/unifiedorder")
+	url := "https://api.mch.weixin.qq.com/pay/unifiedorder"
 	body, _ := xml.Marshal(reqOrder)
 	resp, err := s.http.R().SetBody(body).Post(url)
 	if err != nil {
@@ -56,7 +57,7 @@ func (s *PaymentProvider) GetPayment(query *base.PaymentQuery) (*base.PaymentNot
 
 	req.GenerateSign(s.Endpoint.MchSecret)
 
-	url := fmt.Sprintf("https://api.mch.weixin.qq.com/pay/orderquery")
+	url := "https://api.mch.weixin.qq.com/pay/orderquery"
 
 	body, _ := xml.Marshal(req)
 	resp, err := s.http.R().SetBody(body).Post(url)
@@ -88,7 +89,7 @@ func (s *PaymentProvider) Transfer(transfer *base.PaymentTransfer) error {
 	req.FromPaymentTransfer(transfer)
 	req.GenerateSign(s.Endpoint.MchSecret)
 
-	url := fmt.Sprintf("https://api.mch.weixin.qq.com/mmpaymkttransfers/promotion/transfers")
+	url := "https://api.mch.weixin.qq.com/mmpaymkttransfers/promotion/transfers"
 	body, _ := xml.Marshal(req)
 	resp, err := s.http.R().SetBody(body).Post(url)
 	if err != nil {
@@ -120,7 +121,7 @@ func (s *PaymentProvider) QueryTransfer(query *base.QueryTransfer) (*base.QueryT
 	req.FromTransferQuery(query)
 	req.GenerateSign(s.Endpoint.MchSecret)
 
-	url := fmt.Sprintf("https://api.mch.weixin.qq.com/mmpaymkttransfers/gettransferinfo")
+	url := "https://api.mch.weixin.qq.com/mmpaymkttransfers/gettransferinfo"
 	body, _ := xml.Marshal(req)
 	resp, err := s.http.R().SetBody(body).Post(url)
 	if err != nil {
@@ -153,7 +154,7 @@ func (s *PaymentProvider) Refund(payment *base.Payment) error {
 	req.FromPayment(payment)
 	req.GenerateSign(s.Endpoint.MchSecret)
 
-	url := fmt.Sprintf("https://api.mch.weixin.qq.com/secapi/pay/refund")
+	url := "https://api.mch.weixin.qq.com/secapi/pay/refund"
 	body, _ := xml.Marshal(req)
 	resp, err := s.http.R().SetBody(body).Post(url)
 	if err != nil {
@@ -179,7 +180,7 @@ func (s *PaymentProvider) QueryRefund(query *base.QueryRefund) (*base.QueryRefun
 	req.FromQueryRefund(query)
 	req.GenerateSign(s.Endpoint.MchSecret)
 
-	url := fmt.Sprintf("https://api.mch.weixin.qq.com/pay/refundquery")
+	url := "https://api.mch.weixin.qq.com/pay/refundquery"
 	body, _ := xml.Marshal(req)
 	resp, err := s.http.R().SetBody(body).Post(url)
 	if err != nil {
@@ -205,7 +206,7 @@ func (s *PaymentProvider) Close(payment *base.Payment) error {
 	req.FromPayment(payment)
 	req.GenerateSign(s.Endpoint.MchSecret)
 
-	url := fmt.Sprintf("https://api.mch.weixin.qq.com/pay/closeorder")
+	url := "https://api.mch.weixin.qq.com/pay/closeorder"
 	body, _ := xml.Marshal(req)
 	resp, err := s.http.R().SetBody(body).Post(url)
 	if err != nil {
