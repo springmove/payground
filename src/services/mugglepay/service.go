@@ -8,6 +8,8 @@ import (
 	"github.com/linshenqi/payground/src/base"
 	"github.com/linshenqi/sptty"
 	"gopkg.in/resty.v1"
+
+	medusaBase "github.com/linshenqi/medusa/src/services/base"
 )
 
 type Service struct {
@@ -15,6 +17,8 @@ type Service struct {
 
 	http *resty.Client
 	cfg  Config
+
+	serviceDispatcher medusaBase.IDispatcherService
 }
 
 func (s *Service) Init(app sptty.ISptty) error {
@@ -29,7 +33,16 @@ func (s *Service) Init(app sptty.ISptty) error {
 		return err
 	}
 
+	s.serviceDispatcher = app.GetService(medusaBase.ServiceDispatcher).(medusaBase.IDispatcherService)
+	if s.serviceDispatcher == nil {
+		return fmt.Errorf("%s Service Is Required", medusaBase.ServiceDispatcher)
+	}
+
 	app.AddRoute("POST", "/v1/mugglepay-callback", s.routePostMugglePayCallBack)
+
+	if err := s.serviceDispatcher.CreateDispatcher(base.DispatcherMuggleCallback); err != nil {
+		return err
+	}
 
 	return nil
 }

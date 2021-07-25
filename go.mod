@@ -10,6 +10,7 @@ require (
 	github.com/kataras/iris/v12 v12.1.8
 	github.com/klauspost/compress v1.10.10 // indirect
 	github.com/lib/pq v1.7.0 // indirect
+	github.com/linshenqi/medusa v0.0.1
 	github.com/linshenqi/sptty v0.1.2
 	github.com/microcosm-cc/bluemonday v1.0.3 // indirect
 	github.com/sirupsen/logrus v1.6.0 // indirect

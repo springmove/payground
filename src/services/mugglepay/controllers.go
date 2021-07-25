@@ -21,7 +21,9 @@ func (s *Service) routePostMugglePayCallBack(ctx iris.Context) {
 		goto END
 	}
 
-	fmt.Println(req)
+	if err = s.serviceDispatcher.Dispatch(base.DispatcherMuggleCallback, req); err != nil {
+		sptty.Log(sptty.ErrorLevel, fmt.Sprintf("routePostMugglePayCallBack.Dispatch Failed: %s", err.Error()), s.ServiceName())
+	}
 
 END:
 	_ = sptty.SimpleResponse(ctx, status, map[string]int{
