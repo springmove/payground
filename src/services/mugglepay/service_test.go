@@ -22,7 +22,7 @@ func TestCreateOrder(t *testing.T) {
 
 	srv := getSrv()
 	resp, err := srv.CreateOrder(&base.MuggleReqOrder{
-		MerchantOrderID: "test8",
+		MerchantOrderID: "test9",
 		PriceAmount:     1,
 		PriceCurrency:   "USD",
 		PayCurrency:     base.MugglePayCurrencyAlipay,
@@ -36,6 +36,14 @@ func TestCreateOrder(t *testing.T) {
 		return
 	}
 
-	fmt.Println(resp.PaymentUrl)
-	fmt.Println(*resp.Order)
+	// fmt.Println(resp.PaymentUrl)
+	// fmt.Println(*resp.Order)
+
+	queryOrder, err := srv.GetOrder(resp.Order.OrderID)
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+
+	fmt.Println(queryOrder.Order)
 }

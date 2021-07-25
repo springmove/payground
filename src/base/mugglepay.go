@@ -29,6 +29,7 @@ const (
 
 type ISerivceMuggle interface {
 	CreateOrder(req *MuggleReqOrder) (*MuggleRespOrderCreate, error)
+	GetOrder(orderID string) (*MuggleRespOrderCreate, error)
 }
 
 type MuggleReqOrder struct {
