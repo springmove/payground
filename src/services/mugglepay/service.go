@@ -18,11 +18,16 @@ type Service struct {
 }
 
 func (s *Service) Init(app sptty.ISptty) error {
+
+	s.http = sptty.CreateHttpClient(sptty.DefaultHttpClientConfig())
+
+	if app == nil {
+		return nil
+	}
+
 	if err := app.GetConfig(s.ServiceName(), &s.cfg); err != nil {
 		return err
 	}
-
-	s.http = sptty.CreateHttpClient(sptty.DefaultHttpClientConfig())
 
 	app.AddRoute("POST", "/v1/mugglepay-callback", s.routePostMugglePayCallBack)
 

@@ -2,11 +2,34 @@ package base
 
 const (
 	ServiceMugglePay = "mugglepay"
+
+	DispatcherMuggleCallback = "DispatcherMuggleCallback"
 )
 
 const (
 	MuggleHeaderToken = "token"
+
+	MugglePayStatusNEW     = "NEW"
+	MugglePayStatusPENDING = "PENDING"
+
+	MugglePayStatusFinalCANCELED = "CANCELED"
+	MugglePayStatusFinalEXPIRED  = "EXPIRED"
+
+	MugglePayStatusFinalUNRESOLVED = "UNRESOLVED"
+	MugglePayStatusFinalRESOLVED   = "RESOLVED"
+
+	MugglePayStatusFinalPAID     = "PAID"
+	MugglePayStatusFinalREFUNDED = "REFUNDED"
+
+	MugglePayCurrencyWechat       = "WECHAT"
+	MugglePayCurrencyAlipay       = "ALIPAY"
+	MugglePayCurrencyAlipayGlobal = "ALIGLOBAL"
+	MugglePayCurrencyAlipayUsdt   = "USDT"
 )
+
+type ISerivceMuggle interface {
+	CreateOrder(req *MuggleReqOrder) (*MuggleRespOrderCreate, error)
+}
 
 type MuggleReqOrder struct {
 	// 用户订单id

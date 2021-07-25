@@ -6,7 +6,8 @@ log:
   rotate: 24h
 
 http:
-  addr: :10025
+  addr: :8080
+  tag: /payground
 
 model:
   enable: false
@@ -19,3 +20,5 @@ payment:
       mch_key: 1595767231
       mch_secret: JFGxc4TRaYKcwiHi96AhBvxWxx9CUhsO
       
+mugglepay:
+  token: 

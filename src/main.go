@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 
+	"github.com/linshenqi/payground/src/services/mugglepay"
 	"github.com/linshenqi/payground/src/services/payment"
 	"github.com/linshenqi/sptty"
 )
@@ -18,10 +19,12 @@ func main() {
 
 	services := sptty.Services{
 		&payment.Service{},
+		&mugglepay.Service{},
 	}
 
 	configs := sptty.Configs{
 		&payment.Config{},
+		&mugglepay.Config{},
 	}
 
 	app.AddServices(services)
