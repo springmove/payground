@@ -24,7 +24,7 @@ const (
 	MugglePayCurrencyWechat       = "WECHAT"
 	MugglePayCurrencyAlipay       = "ALIPAY"
 	MugglePayCurrencyAlipayGlobal = "ALIGLOBAL"
-	MugglePayCurrencyAlipayUsdt   = "USDT"
+	MugglePayCurrencyUSDT         = "USDT"
 )
 
 type ISerivceMuggle interface {
