@@ -11,6 +11,12 @@ const (
 )
 
 const (
+	PaymentTypeWechatMiniProgram = PaymentMiniProgram
+	PaymentTypeAlipayScan        = "alipay_scan"
+	PaymentTypeAlipayWap         = "alipay_wap"
+)
+
+const (
 	PaymentNotifyLen = 4096
 )
 
@@ -35,6 +41,9 @@ const (
 
 	// 其他错误
 	PaymentStatusUnKnown = "unknown"
+
+	// 交易结束
+	PaymentStatusFinished = "finished"
 )
 
 const (
@@ -83,11 +92,11 @@ type PaymentEndpoint struct {
 }
 
 type Payment struct {
-	AppKey   string `json:"app_key"`
-	Type     string `json:"type"`
-	TradeNo  string `json:"trade_no"`
-	Desc     string `json:"desc"`
-	TotalFee int    `json:"total_fee"`
+	AppKey   string  `json:"app_key"`
+	Type     string  `json:"type"`
+	TradeNo  string  `json:"trade_no"`
+	Desc     string  `json:"desc"`
+	TotalFee float32 `json:"total_fee"`
 
 	// 退款时使用，如果为0则表示全额退款
 	RefundFee int `json:"refund_fee"`
@@ -107,12 +116,13 @@ type PaymentQuery struct {
 }
 
 type CreatePaymentResp struct {
-	Type      string `json:"type"`
-	PrePayID  string `json:"prepay_id"`
-	TimeStamp int64  `json:"timestamp"`
-	NonceStr  string `json:"nonce_str"`
-	SignType  string `json:"sign_type"`
-	Sign      string `json:"sign"`
+	Type       string `json:"type"`
+	PrePayID   string `json:"prepay_id"`
+	TimeStamp  int64  `json:"timestamp"`
+	NonceStr   string `json:"nonce_str"`
+	SignType   string `json:"sign_type"`
+	Sign       string `json:"sign"`
+	PaymentUrl string `json:"payment_url"`
 }
 
 type PaymentTransfer struct {

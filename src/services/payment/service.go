@@ -5,6 +5,7 @@ import (
 	"fmt"
 
 	"github.com/linshenqi/payground/src/base"
+	"github.com/linshenqi/payground/src/services/payment/vendors/alipay"
 	"github.com/linshenqi/payground/src/services/payment/vendors/wechat"
 	"github.com/linshenqi/sptty"
 )
@@ -55,12 +56,18 @@ func (s *Service) initProviders(app sptty.ISptty) error {
 		case base.PaymentWechat, base.PaymentMiniProgram:
 			provider = &wechat.PaymentProvider{}
 
+		case base.PaymentAlipay:
+			provider = &alipay.PaymentProvider{}
+
 		default:
 			return fmt.Errorf("Provider Error: %s ", v.Provider)
 		}
 
 		controller := provider.GetNotifyController()
-		app.AddRoute(controller.Method, controller.Endpoint, controller.Handler)
+
+		if app != nil {
+			app.AddRoute(controller.Method, controller.Endpoint, controller.Handler)
+		}
 
 		endpoint := s.cfg.Endpoints[k]
 		if err := provider.Init(s.cfg.PaymentUrl, &endpoint); err != nil {

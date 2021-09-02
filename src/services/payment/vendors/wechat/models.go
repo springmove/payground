@@ -77,12 +77,12 @@ type ReqOrder struct {
 
 func (s *ReqOrder) FromPayment(payment *base.Payment) {
 	s.AppKey = payment.AppKey
-	s.TotalFee = payment.TotalFee
+	s.TotalFee = int(payment.TotalFee)
 	s.TradeNo = payment.TradeNo
 	s.Boby = payment.Desc
 
 	switch payment.Type {
-	case base.PaymentMiniProgram:
+	case base.PaymentTypeWechatMiniProgram:
 		s.TradeType = TradeTypeMiniProgram
 
 	default:
@@ -276,12 +276,12 @@ func (s *ReqRefund) FromPayment(payment *base.Payment) {
 	s.AppKey = payment.AppKey
 	s.TradeNo = payment.TradeNo
 	s.RefundNo = payment.TradeNo
-	s.TotalFee = payment.TotalFee
+	s.TotalFee = int(payment.TotalFee)
 
 	if payment.RefundFee > 0 {
 		s.RefundFee = payment.RefundFee
 	} else {
-		s.RefundFee = payment.TotalFee
+		s.RefundFee = int(payment.TotalFee)
 	}
 }
 
