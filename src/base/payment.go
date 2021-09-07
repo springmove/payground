@@ -75,6 +75,16 @@ const (
 	ErrorUnknown = "ErrorUnknown"
 )
 
+type IServicePayment interface {
+	CreatePayment(endpoint string, payment *Payment) (*CreatePaymentResp, error)
+	GetPayment(endpoint string, query *PaymentQuery) (*PaymentNotify, error)
+	Transfer(endpoint string, transfer *PaymentTransfer) error
+	QueryTransfer(endpoint string, query *QueryTransfer) (*QueryTransferResp, error)
+	Refund(endpoint string, payment *Payment) error
+	QueryRefund(endpoint string, query *QueryRefund) (*QueryRefundResp, error)
+	ClosePayment(endpoint string, payment *Payment) error
+}
+
 type PaymentNotifyHandler func(notify *PaymentNotify)
 
 type PaymentNotifyController struct {
