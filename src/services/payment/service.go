@@ -10,11 +10,9 @@ import (
 	"github.com/linshenqi/sptty"
 )
 
-const (
-	ServiceName = "payment"
-)
-
 type Service struct {
+	sptty.BaseService
+
 	cfg       Config
 	providers map[string]base.IPaymentProvider
 }
@@ -39,12 +37,8 @@ func (s *Service) Release() {
 	}
 }
 
-func (s *Service) Enable() bool {
-	return true
-}
-
 func (s *Service) ServiceName() string {
-	return ServiceName
+	return base.ServicePayment
 }
 
 func (s *Service) initProviders(app sptty.ISptty) error {

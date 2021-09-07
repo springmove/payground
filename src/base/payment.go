@@ -5,6 +5,10 @@ import (
 )
 
 const (
+	ServicePayment = "payment"
+)
+
+const (
 	PaymentMiniProgram = "miniprogram"
 	PaymentWechat      = "wechat"
 	PaymentAlipay      = "alipay"
