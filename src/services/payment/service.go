@@ -59,7 +59,7 @@ func (s *Service) initProviders(app sptty.ISptty) error {
 
 		controller := provider.GetNotifyController()
 
-		if app != nil {
+		if app != nil && controller != nil {
 			app.AddRoute(controller.Method, controller.Endpoint, controller.Handler)
 		}
 
