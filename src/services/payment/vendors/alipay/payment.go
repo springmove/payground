@@ -19,9 +19,9 @@ func (s *PaymentProvider) Init(paymentUrl string, endpoint *base.PaymentEndpoint
 		return fmt.Errorf("Create Alipay Client Failed: %s", err.Error())
 	}
 
-	// if err := client.LoadAliPayPublicCert(endpoint.CertFile); err != nil {
-	// 	return fmt.Errorf("Load PublicKey Failed: %s", err.Error())
-	// }
+	if err := client.LoadAliPayPublicKey(endpoint.CertFile); err != nil {
+		return fmt.Errorf("Load PublicKey Failed: %s", err.Error())
+	}
 
 	s.client = client
 
@@ -44,6 +44,14 @@ func (s *PaymentProvider) CreatePayment(payment *base.Payment) (*base.CreatePaym
 		}
 
 		paymentResp = AlipayPreCreateResp2PaymentResp(resp)
+
+	case base.PaymentTypeAlipayWap:
+		resp, err := s.client.TradeWapPay(*Payment2AlipayTradeWapPayReq(payment))
+		if err != nil {
+			return nil, err
+		}
+
+		paymentResp.PaymentUrl = resp.String()
 
 	default:
 		return nil, fmt.Errorf("Payment Type Not Supported: %s", payment.Type)

@@ -12,9 +12,8 @@ func getSrv() *Service {
 		cfg: Config{
 			Endpoints: map[string]base.PaymentEndpoint{
 				"alipay": {
-					Provider:  base.PaymentAlipay,
-					MchKey:    "",
-					MchSecret: "",
+					Provider: base.PaymentAlipay,
+					MchKey:   "",
 				},
 			},
 		},
@@ -38,6 +37,7 @@ func TestService(t *testing.T) {
 		Type:     base.PaymentTypeAlipayScan,
 		TradeNo:  "awef123",
 		TotalFee: 0.01,
+		Desc:     "测试订单",
 	})
 
 	if err != nil {
@@ -46,4 +46,15 @@ func TestService(t *testing.T) {
 	}
 
 	fmt.Println(resp)
+
+	// resp, err := srv.GetPayment("alipay", &base.PaymentQuery{
+	// 	TradeNo: "awef123",
+	// })
+
+	// if err != nil {
+	// 	fmt.Println(err.Error())
+	// 	return
+	// }
+
+	// fmt.Println(resp)
 }
