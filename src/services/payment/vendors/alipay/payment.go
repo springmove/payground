@@ -2,6 +2,7 @@ package alipay
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/linshenqi/payground/src/base"
 	v3 "github.com/smartwalle/alipay/v3"
@@ -84,7 +85,7 @@ func (s *PaymentProvider) GetPayment(query *base.PaymentQuery) (*base.PaymentNot
 		return nil, err
 	}
 
-	if resp.Content.Code != v3.CodeSuccess {
+	if resp.Content.Code != v3.CodeSuccess && !strings.Contains(resp.Content.SubCode, "TRADE_NOT_EXIST") {
 		return nil, fmt.Errorf("Alipay.GetPayment Failed Code:%s Msg:%s", resp.Content.Code, resp.Content.Msg)
 	}
 

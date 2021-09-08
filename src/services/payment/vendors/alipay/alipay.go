@@ -2,6 +2,7 @@ package alipay
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/linshenqi/payground/src/base"
 	v3 "github.com/smartwalle/alipay/v3"
@@ -77,7 +78,11 @@ func AlipayTradeQueryResp2PaymentNotify(resp *v3.TradeQueryRsp) *base.PaymentNot
 
 	case v3.TradeStatusFinished:
 		paymentNotify.Status = base.PaymentStatusFinished
-
 	}
+
+	if strings.Contains(resp.Content.SubCode, "TRADE_NOT_EXIST") {
+		paymentNotify.Status = base.PaymentStatusNotPay
+	}
+
 	return &paymentNotify
 }

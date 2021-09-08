@@ -35,9 +35,10 @@ func TestService(t *testing.T) {
 		return
 	}
 
+	eid := "awef"
 	resp, err := srv.CreatePayment("alipay", &base.Payment{
-		Type:     base.PaymentTypeAlipayWap,
-		TradeNo:  "aw233ef234234",
+		Type:     base.PaymentTypeAlipayScan,
+		TradeNo:  eid,
 		TotalFee: 0.01,
 		Desc:     "测试订单",
 	})
@@ -49,14 +50,14 @@ func TestService(t *testing.T) {
 
 	fmt.Println(resp)
 
-	// resp, err := srv.GetPayment("alipay", &base.PaymentQuery{
-	// 	TradeNo: "awef123",
-	// })
+	respQuery, err := srv.GetPayment("alipay", &base.PaymentQuery{
+		TradeNo: eid,
+	})
 
-	// if err != nil {
-	// 	fmt.Println(err.Error())
-	// 	return
-	// }
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
 
-	// fmt.Println(resp)
+	fmt.Println(respQuery)
 }
