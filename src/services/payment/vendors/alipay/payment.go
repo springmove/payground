@@ -45,13 +45,25 @@ func (s *PaymentProvider) CreatePayment(payment *base.Payment) (*base.CreatePaym
 
 		paymentResp = AlipayPreCreateResp2PaymentResp(resp)
 
+	case base.PaymentTypeAlipayPage:
+		resp, err := s.client.TradePagePay(*Payment2AlipayTradePagePayReq(payment))
+		if err != nil {
+			return nil, err
+		}
+
+		paymentResp = &base.CreatePaymentResp{
+			PaymentUrl: resp.String(),
+		}
+
 	case base.PaymentTypeAlipayWap:
 		resp, err := s.client.TradeWapPay(*Payment2AlipayTradeWapPayReq(payment))
 		if err != nil {
 			return nil, err
 		}
 
-		paymentResp.PaymentUrl = resp.String()
+		paymentResp = &base.CreatePaymentResp{
+			PaymentUrl: resp.String(),
+		}
 
 	default:
 		return nil, fmt.Errorf("Payment Type Not Supported: %s", payment.Type)

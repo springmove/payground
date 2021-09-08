@@ -23,6 +23,20 @@ func Payment2AlipayTradeWapPayReq(payment *base.Payment) *v3.TradeWapPay {
 	req.OutTradeNo = payment.TradeNo
 	req.TotalAmount = fmt.Sprintf("%.2f", payment.TotalFee)
 	req.Subject = payment.Desc
+	req.ReturnURL = payment.ReturnUrl
+	req.ProductCode = "QUICK_WAP_PAY"
+
+	return &req
+}
+
+func Payment2AlipayTradePagePayReq(payment *base.Payment) *v3.TradePagePay {
+
+	req := v3.TradePagePay{}
+	req.OutTradeNo = payment.TradeNo
+	req.TotalAmount = fmt.Sprintf("%.2f", payment.TotalFee)
+	req.Subject = payment.Desc
+	req.ReturnURL = payment.ReturnUrl
+	req.ProductCode = "FAST_INSTANT_TRADE_PAY"
 
 	return &req
 }
@@ -35,7 +49,6 @@ func AlipayPreCreateResp2PaymentResp(resp *v3.TradePreCreateRsp) *base.CreatePay
 
 	return &paymentResp
 }
-
 
 func AlipayTradeWapPayResp2PaymentResp(resp *v3.TradePreCreateRsp) *base.CreatePaymentResp {
 

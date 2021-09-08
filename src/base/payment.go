@@ -17,6 +17,7 @@ const (
 const (
 	PaymentTypeWechatMiniProgram = PaymentMiniProgram
 	PaymentTypeAlipayScan        = "alipay_scan"
+	PaymentTypeAlipayPage        = "alipay_page"
 	PaymentTypeAlipayWap         = "alipay_wap"
 )
 
@@ -116,6 +117,8 @@ type Payment struct {
 	RefundFee int `json:"refund_fee"`
 
 	OpenID string `json:"openid"`
+
+	ReturnUrl string `json:"return_url"`
 }
 
 type PaymentNotify struct {
