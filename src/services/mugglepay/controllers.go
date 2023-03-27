@@ -4,8 +4,8 @@ import (
 	"fmt"
 
 	"github.com/kataras/iris/v12"
-	"github.com/linshenqi/payground/src/base"
-	"github.com/linshenqi/sptty"
+	"github.com/springmove/payground/src/base"
+	"github.com/springmove/sptty"
 )
 
 func (s *Service) routePostMugglePayCallBack(ctx iris.Context) {

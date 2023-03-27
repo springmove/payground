@@ -1,6 +1,6 @@
 package mugglepay
 
-import "github.com/linshenqi/payground/src/base"
+import "github.com/springmove/payground/src/base"
 
 type Config struct {
 	Token string `yaml:"token"`

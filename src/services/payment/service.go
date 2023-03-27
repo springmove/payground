@@ -4,10 +4,10 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/linshenqi/payground/src/base"
-	"github.com/linshenqi/payground/src/services/payment/vendors/alipay"
-	"github.com/linshenqi/payground/src/services/payment/vendors/wechat"
-	"github.com/linshenqi/sptty"
+	"github.com/springmove/payground/src/base"
+	"github.com/springmove/payground/src/services/payment/vendors/alipay"
+	"github.com/springmove/payground/src/services/payment/vendors/wechat"
+	"github.com/springmove/sptty"
 )
 
 type Service struct {

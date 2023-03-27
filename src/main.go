@@ -3,9 +3,9 @@ package main
 import (
 	"flag"
 
-	"github.com/linshenqi/payground/src/services/mugglepay"
-	"github.com/linshenqi/payground/src/services/payment"
-	"github.com/linshenqi/sptty"
+	"github.com/springmove/payground/src/services/mugglepay"
+	"github.com/springmove/payground/src/services/payment"
+	"github.com/springmove/sptty"
 )
 
 func main() {

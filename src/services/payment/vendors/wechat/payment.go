@@ -4,8 +4,8 @@ import (
 	"encoding/xml"
 	"fmt"
 
-	"github.com/linshenqi/payground/src/base"
-	"github.com/linshenqi/sptty"
+	"github.com/springmove/payground/src/base"
+	"github.com/springmove/sptty"
 	"gopkg.in/resty.v1"
 )
 

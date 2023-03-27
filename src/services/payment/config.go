@@ -1,8 +1,8 @@
 package payment
 
 import (
-	"github.com/linshenqi/payground/src/base"
-	"github.com/linshenqi/sptty"
+	"github.com/springmove/payground/src/base"
+	"github.com/springmove/sptty"
 )
 
 type Config struct {

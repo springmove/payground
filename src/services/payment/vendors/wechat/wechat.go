@@ -7,8 +7,8 @@ import (
 	"time"
 
 	"github.com/kataras/iris/v12"
-	"github.com/linshenqi/payground/src/base"
-	"github.com/linshenqi/sptty"
+	"github.com/springmove/payground/src/base"
+	"github.com/springmove/sptty"
 )
 
 func (s *PaymentProvider) generatePaymentResp(paymentType string, prepayID string, nonceStr string, appID string) *base.CreatePaymentResp {

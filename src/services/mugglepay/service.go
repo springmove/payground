@@ -5,11 +5,11 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/linshenqi/payground/src/base"
-	"github.com/linshenqi/sptty"
+	"github.com/springmove/payground/src/base"
+	"github.com/springmove/sptty"
 	"gopkg.in/resty.v1"
 
-	medusaBase "github.com/linshenqi/medusa/src/base"
+	medusaBase "github.com/springmove/medusa/src/base"
 )
 
 type Service struct {

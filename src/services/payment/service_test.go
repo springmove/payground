@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/linshenqi/payground/src/base"
+	"github.com/springmove/payground/src/base"
 )
 
 func getSrv() *Service {
